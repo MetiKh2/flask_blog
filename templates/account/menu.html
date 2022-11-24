@@ -1,0 +1,45 @@
+<div class="col-4">
+  <div class="card">
+    <div class="card-header">Account Setting</div>
+    <div class="card-body justify-content-center text-center">
+      @if current_user.avatar
+      <img
+        class="rounded-circle"
+        src="{{ url_for('static' , filename=current_user.avatar) }}"
+        width="170"
+        height="170"
+        alt=""
+      />
+      @else
+      <img
+        class="rounded-circle"
+        src="{{ url_for('static' , filename='uploads/avatar.jpg') }}"
+        width="170"
+        height="170"
+        alt=""
+      />
+      @endif
+      <p class="text-center mt-2">{{ current_user.username }}</p>
+      <hr />
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a class="link" href="{{url_for('AccountInfo')}}">Info Account</a>
+        </li>
+        <li class="list-group-item">
+          <a class="link" href="{{url_for('AccountEdit')}}">Edit Profile</a>
+        </li>
+        <li class="list-group-item">
+          <a class="link" href="{{url_for('AccountAvatar')}}">Profile Avatar</a>
+        </li>
+        <li class="list-group-item">
+          <a class="link" href="{{url_for('ChangePassword')}}"
+            >Change Password</a
+          >
+        </li>
+        <li class="list-group-item bg-danger">
+          <a class="link text-white" href="{{url_for('SignOut')}}">Sign Out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

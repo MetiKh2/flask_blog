@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/app.css')}}">
+</head>
+<body>
+    <h1 class="title">welcome</h1>
+    <h2>
+        <!-- {{"%s ************* %s"|format('toplearn','meti')}} -->
+        <!-- {{"Hello Guys"|replace('Hello','Hi')}} -->
+        <!-- {{12|float}} -->
+        <!-- {{[1,2,3,4,5,6,78,9]|count}} -->
+        <!-- {{content|default('def')}} -->
+        <!-- {{-2|abs}} -->
+        @ if content is defined
+        <b>{{content}}</b>
+        @ else 
+        <b>default</b>
+        @endif
+    </h2>
+    <h2>this for </h2>
+    {{PostId}}
+    @ if PostId==1 
+    <h3>First</h3>
+    @ else 
+     <h3>Not First</h3>
+    @ endif 
+    <ul>
+        @ for course in Courses
+        <li>{{course }}</li>
+        @endfor
+    </ul>
+
+    <h2>upload</h2>
+    @with messages=get_flashed_messages(with_categories=true)
+        @if messages
+           @for message,category in messages
+                <span>{{message}} --  {{category}}</span>
+           @endfor
+        @endif
+    @endwith    
+    <form action="{{url_for('UploadFile')}}" enctype="multipart/form-data" method="post">
+        <input type="file" name="photo">
+        <button type="submit">Sub</button>
+    </form>
+
+    
+
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+</body>
+</html>

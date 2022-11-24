@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/app.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {{ moment.include_moment() }}
+  </head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Blog App</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Category</a>
+                <ul class="dropdown-menu">
+                  @ for category in categories 
+                  <li><a class="dropdown-item" href="{{ url_for('view_category' , name=category.name) }}">{{ category.name }}</a></li>
+                  @endfor 
+                </ul>
+              </li>
+              <form action="{{ url_for('search') }}" method="get">
+                <li class="nav-item d-flex">
+                  <input class="form-control me-2" name="s" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-light" type="submit">Search</button>
+                </li>
+              </form>
+
+            </ul>
+           
+            <div class="d-flex">
+
+                @ if current_user.is_authenticated  
+                <div class="btn-group" role="group">
+                  <a href="{{ url_for('SignOut') }}" class="btn btn-danger">Sign Out</a>
+                </div>
+                @ else  
+                <div class="btn-group" role="group">
+                  <a href="{{ url_for('Login') }}" class="btn btn-outline-warning">Sign In</a>
+                  <a href="{{ url_for('Register') }}" class="btn btn-outline-info">Sign Up</a>
+                </div>
+                @ endif  
+              </div>
+            </div>
+          </div>
+        </nav>

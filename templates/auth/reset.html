@@ -1,0 +1,37 @@
+ @ include './header.html'  
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-4">
+            <h1>Reset Password Form</h1>
+            <hr>
+            <form action="{{ url_for('reset_password' , token = token  , user_id=user_id) }}" method="post" novalidate>
+
+              
+                 @ with messages = get_flashed_messages(with_categories=true)  
+                     @ for category , message in messages  
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                     @ endfor  
+                 @ endwith  
+
+                <div class="mb-3">
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Reset Password</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+ @ include './footer.html'  

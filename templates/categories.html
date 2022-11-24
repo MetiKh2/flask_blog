@@ -1,0 +1,40 @@
+@ include 'header.html'  
+
+
+<div class="container">
+    <div class="row mt-4">
+        <h2>All Post For Category : {{ name }}</h2>
+        <hr>
+        @ for article in articles  
+        @ if article.publish  
+        <div class="col-4">
+           
+            <div class="card">
+                <img src="{{ url_for('static' , filename=article.thumb) }}" width="300" height="250" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h6 class="card-title text-primary">{{ article.subject }}</h5>
+                    <p class="card-text">
+                        {{ article.content | subContent }}
+                    </p>
+                    <hr>
+                    <a href="{{ url_for('single' , id=article.id) }}" class="btn btn-outline-primary">Read More</a>
+                </div>
+                <div class="card-footer">
+                    <span>{{  moment(article.created_at).fromNow() }}</span>
+                    |
+                    <b>Views : <span class="pl-3">  {{ article.views }} </span></b>
+                </div>
+            </div>
+           
+        </div>
+        @ endif  
+        @ endfor  
+
+    
+    </div>
+</div>
+
+
+
+
+@ include 'footer.html'  

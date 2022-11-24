@@ -1,0 +1,20 @@
+@include 'header.html'
+<form action="/login" method="post" novalidate>
+    {{form.csrf_token}}
+    <ul>
+        @for field,errors in form.errors.items()
+        <li>{{field}} --  {{' , '.join(errors)}}</li>
+        @endfor
+    </ul>
+     <p>{{form.username}}</p>
+     <p>{{form.password}}</p>
+     <p>{{form.submit}}</p>
+</form>
+<br>
+<form action="/login" method="get">
+    <input type="text" name="find" placeholder="Find ...">
+    <br>
+    <button type="submit">Submit</button>
+</form>
+ 
+@include 'footer.html'

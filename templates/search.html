@@ -1,0 +1,40 @@
+ @include 'header.html'  
+
+
+<div class="container">
+    <div class="row mt-4">
+        <h2>All Post For Search : {{ search_input }}</h2>
+        <hr>
+         @for post in posts  
+         @if post.publish  
+        <div class="col-4">
+           
+            <div class="card">
+                <img src="{{ url_for('static' , filename=post.thumb) }}" width="300" height="250" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h6 class="card-title text-primary">{{ post.subject }}</h5>
+                    <p class="card-text">
+                        {{ post.content | subContent }}
+                    </p>
+                    <hr>
+                    <a href="{{ url_for('single' , id=post.id) }}" class="btn btn-outline-primary">Read More</a>
+                </div>
+                <div class="card-footer">
+                    <span>{{  moment(post.created_at).fromNow() }}</span>
+                    |
+                    <b>Views : <span class="pl-3">  {{ post.views }} </span></b>
+                </div>
+            </div>
+           
+        </div>
+         @endif  
+         @endfor  
+
+    
+    </div>
+</div>
+
+
+
+
+ @include 'footer.html'  

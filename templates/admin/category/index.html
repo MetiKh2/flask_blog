@@ -1,0 +1,40 @@
+  @ include './header.html'   
+
+
+<div class="container">
+    <div class="row mt-4">
+          @ include "./admin/menu.html"   
+        <div class="col-9 justify-content-center">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Category Name</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                      @ for category in categories   
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a href="{{ url_for('edit_category') }}?id={{ category.id }}" class="btn btn-info btn-sm">Edit</a>
+                                <form action="{{ url_for('get_all_categories') }}?id={{category.id}}" method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm">Del</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @ endfor   
+                </tbody>
+              </table>
+              
+        </div>
+    </div>
+</div>
+
+
+
+  @ include './footer.html'   

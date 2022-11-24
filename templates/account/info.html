@@ -1,0 +1,31 @@
+@ include './header.html' 
+
+
+<div class="container">
+    <div class="row mt-4">
+      @ include "./account/menu.html" 
+        <div class="col-8 border bg-white">
+            <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Name</span>
+                <input type="text" class="form-control" placeholder="{{ current_user.username }}" aria-label="Username" aria-describedby="basic-addon1" readonly>
+              </div>
+              <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Email</span>
+                <input type="text" class="form-control" placeholder="{{ current_user.email }}" aria-label="Username" aria-describedby="basic-addon1" readonly>
+              </div>
+              <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Phone</span>
+                <input type="text" class="form-control" placeholder="{{ current_user.phone }}" aria-label="Username" aria-describedby="basic-addon1" readonly>
+              </div>
+              <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Create Account Date</span>
+                <input type="text" class="form-control" placeholder="{{ current_user.created_at }}" aria-label="Username" aria-describedby="basic-addon1" readonly>
+              </div>
+           
+        </div>
+    </div>
+</div>
+
+
+
+@ include './footer.html' 

@@ -1,0 +1,54 @@
+@ include './header.html'  
+
+
+<div class="container">
+    <div class="row mt-4">
+        @ include "./admin/menu.html"  
+        <div class="col-8 border bg-white">
+            <h5 class="mt-3">Edit Article</h5>
+            <hr>
+           <form action="{{ url_for('edit_post') }}?id={{article.id}}" method="post" novalidate enctype="multipart/form-data">
+               {{ form.csrf_token }}
+               @ for field , error in form.errors.items()  
+               <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                   {{ ' , '.join(error) }}
+                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+               @ endfor  
+            <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Subject</span>
+                {{ form.subject(class="form-control"  , value=article.subject) }}
+              </div>
+              <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Content</span>
+                  <textarea class="form-control" name="content" id="content" cols="30" rows="15">{{ article.content }}</textarea>
+              </div>
+              <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Category</span>
+                <select class="form-control" name="category" id="category">
+                    @for category in categories
+                      <option {{'selected' if category.id==article.category_id else ''}} value='{{category.id}}'>{{category.name}}</option>
+                    @endfor
+                </select>
+              </div>
+              <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Thumb Pic</span>
+                {{ form.thumb(class="form-control"  , value=article.thumb) }}
+                <img src="{{ url_for('static' , filename=article.thumb) }}" width="100" height="100">
+              </div>
+              <div class="input-group mb-3 mt-3">
+                  <input type="checkbox" name="publish" id="publish" {{ 'checked' if article.publish else '' }}>
+                <label for="publish" style="padding-left: 10px;"> Publish Post </label>
+              </div>
+              <div class="input-group mb-3 mt-3">
+                {{ form.submit(class='btn btn-dark w-100') }}
+              </div>
+           
+           </form>
+        </div>
+    </div>
+</div>
+
+
+
+@ include './footer.html'  

@@ -1,0 +1,37 @@
+@include './header.html'  
+
+
+<div class="container">
+    <div class="row mt-4">
+        @include "./admin/menu.html"  
+        <div class="col-4 border bg-white">
+            <h5 class="mt-3">Create New Category</h5>
+            <hr>
+           <form action="{{ url_for('create_category') }}" method="post" novalidate>
+            
+
+               @with messages = get_flashed_messages(with_categories=true)  
+               @for category , message in messages  
+               <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                   {{ message }}
+                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+               @endfor  
+           @endwith  
+
+            <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Category Name</span>
+                  <input type="text" name="name" id="name" class="form-control">
+              </div>
+              <div class="input-group mb-3 mt-3">
+               <button type="submit" class="btn btn-dark w-100">Create Category</button>
+              </div>
+           
+           </form>
+        </div>
+    </div>
+</div>
+
+
+
+@include './footer.html'  

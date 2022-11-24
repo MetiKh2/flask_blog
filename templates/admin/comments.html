@@ -1,0 +1,58 @@
+@ include './header.html'  
+
+
+<div class="container">
+    <div class="row mt-4">
+        @ include "./admin/menu.html"  
+        <div class="col-9 justify-content-center">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Article</th>
+                        <th>Writer</th>
+                        <th>text</th>
+                        <th>Date Created</th>
+                        <th>Approve</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @ for comment in comments  
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ comment.getArticle() }}</td>
+                        <td>{{ comment.getWriter() }}</td>
+                        <td>{{ comment.text }}</td>
+                        <td>{{ moment(comment.created_at).fromNow() }}</td>
+                        <td>
+                            @ if  comment.status   
+                                <span class="text-success">Approved</span>
+                            @ else  
+                                <span class="text-danger">Not Approved</span>
+                            @ endif  
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                @ if not comment.status  
+                                <form action="{{ url_for('approve_comment' , comment_id = comment.id ) }}" method="POST">
+                                    <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                                </form>
+                                @ endif  
+                                <form action="{{ url_for('delete_comment' , comment_id = comment.id ) }}" method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm">Del</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                  @ endfor  
+                </tbody>
+              </table>
+              
+        </div>
+    </div>
+</div>
+
+
+
+@ include './footer.html'  

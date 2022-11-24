@@ -1,0 +1,48 @@
+@ include './header.html'  
+
+
+<div class="container">
+    <div class="row mt-4">
+        @ include "./admin/menu.html"  
+        <div class="col-8 justify-content-center">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Date Joined</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @ for user in users  
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.created_at }}</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a href="{{ url_for('edit_user') }}?id={{user.id}}" class="btn btn-info btn-sm">Edit</a> 
+                                @ if not user.admin  
+                                <form action="{{ url_for('get_all_users') }}?id={{user.id}}" method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm">Del</button>
+                                </form>
+                                @ endif  
+                            </div>
+                        </td>
+                    </tr>
+                  @ endfor  
+                </tbody>
+              </table>
+              
+        </div>
+    </div>
+</div>
+
+
+
+@ include './footer.html'  

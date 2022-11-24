@@ -1,0 +1,41 @@
+@ include './header.html'  
+
+
+<div class="container">
+    <div class="row mt-4">
+        @ include "./admin/menu.html"  
+        <div class="col-4 border bg-white">
+            <h5 class="mt-3">Edit User Info Account</h5>
+            <hr>
+           <form action="{{ url_for('edit_user') }}?id={{user.id}}" method="post" novalidate>
+               {{ form.csrf_token }}
+               @ for field , error in form.errors.items()  
+               <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                   {{ ' , '.join(error) }}
+                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+               @ endfor  
+            <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Name</span>
+                {{ form.username(class="form-control"  , value=user.username) }}
+              </div>
+              <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Email</span>
+                {{ form.email(class="form-control"  , value=user.email) }}
+              </div>
+              <div class="input-group mb-3 mt-3">
+                <span class="input-group-text" id="basic-addon1">Phone</span>
+                {{ form.phone(class="form-control"  , value=user.phone) }}
+              </div>
+              <div class="input-group mb-3 mt-3">
+                {{ form.submit(class='btn btn-info w-100') }}
+              </div>
+           
+           </form>
+        </div>
+    </div>
+</div>
+
+
+
+@ include './footer.html'  

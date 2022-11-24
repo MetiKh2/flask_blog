@@ -1,0 +1,52 @@
+@include './header.html'  
+
+
+<div class="container">
+    <div class="row mt-4">
+        @include "./admin/menu.html"  
+        <div class="col-9 justify-content-center">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Subject</th>
+                        <th>Writer</th>
+                        <th>Date Created</th>
+                        <th>Publish</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for article in articles  
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ article.subject }}</td>
+                        <td>{{ article.getWriter() }}</td>
+                        <td>{{ article.created_at }}</td>
+                        <td>
+                            @if  article.publish   
+                                <span class="text-success">Published</span>
+                            @else  
+                                <span class="text-danger">Saved</span>
+                            @endif  
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a href="{{ url_for('edit_post') }}?id={{ article.id }}" class="btn btn-info btn-sm">Edit</a>
+                                <form action="{{ url_for('get_all_articles') }}?id={{article.id}}" method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm">Del</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                  @endfor  
+                </tbody>
+              </table>
+              
+        </div>
+    </div>
+</div>
+
+
+
+@include './footer.html'  

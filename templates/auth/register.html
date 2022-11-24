@@ -1,0 +1,64 @@
+@include './header.html' 
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-8">
+            <h1>Sign Up Form</h1>
+            <hr>
+            <form action="{{ url_for('Register') }}" method="post" novalidate>
+
+                @ for field , error in form.errors.items()  
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ ' , '.join(error) }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @ endfor  
+
+                @ with messages = get_flashed_messages(with_categories=true)  
+                    @ for category , message in messages  
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @ endfor  
+                @ endwith  
+
+                {{ form.csrf_token }}
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form.username(class='form-control' , placeholder='Name') }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form.email(class='form-control' , placeholder='Email') }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form.password(class='form-control' , placeholder='Password') }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form.re_password(class='form-control' , placeholder='Confirm') }}
+                    </div>
+                </div>
+                <!-- <div class="mb-3">
+                    <div class="form-group">
+                        {{ form.recaptcha }}
+                    </div>
+                </div> -->
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form.submit(class='btn btn-info' , value='Sign Up') }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@include './footer.html' 
